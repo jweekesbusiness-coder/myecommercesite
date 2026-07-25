@@ -1,13 +1,25 @@
-{%{% extends "base.html" %}%}
+{% extends "myapp/base.html" %} {%block body%}
+<div>
+  <h1 class="text-2xl px-32 pt-10">Today's Deals</h1>
+  <div class="px-32">
+    <hr class="border-t border-gray-300 my-6" />
+  </div>
+  <div class="grid grid-cols-4 px-32 gap-6">
+    {%for product in products %}
+    <div class="rounded-lg shadow-lg p-4">
+      <img src="{{product.image.url}}" class="rounded-md mb-4 w-80 h-80 object-cover mx-auto"/>
+      {% comment %} <a class="text-lg font-semibold" href="{%url 'detail' product.slug%}">{{product.name}}</a> {% endcomment %}
+      <a class="text-lg font-semibold" href="{{product.get_absolute_url}}">{{product.name}}</a>
+      <p class="text-gray-600">{{product.description}}</p>
+      <p class="text-green-500 font-bold mt-2 text-lg">${{product.price}}</p>
+    </div>
+    {%endfor%}
+  </div>
+</div>
 
-{%block body%}
-<h1>This is the index page</h1>
-
-{%for product in products %}
-    <p>{{product.name}}</p>
-    <img src="{{product.image.url}}"/>
-    <p>{{product.price}}</p>
-    <p>{{product.description}}</p>
+{% endblock %} {%for product in products %}
+<p>{{product.name}}</p>
+<img src="{{product.image.url}}" />
+<p>{{product.price}}</p>
+<p>{{product.description}}</p>
 {%endfor%}
-
-{% endblock %}

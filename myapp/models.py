@@ -1,8 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Product(models.Model):
+    # Add a method to generate the absolute URL for the product detail page
+    #This helps in creating SEO-friendly URLs for each product, which can improve search engine rankings and user experience.
+    def get_absolute_url(self):
+        return reverse("detail", args=[self.slug])
+    
+
     name = models.CharField(max_length=100)
     price = models.FloatField()
     description = models.TextField()
