@@ -1,0 +1,53 @@
+# ==========================================
+# Django & Python Core Ignores
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+*.pot
+
+# Database
+db.sqlite3
+*.sqlite3
+
+# Local/Secret Environment Variables
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django Media and Collected Static files
+media/
+static_cdn/
+staticfiles/
+
+# ==========================================
+# Testing & Code Quality
+# ==========================================
+.htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+.tox/
+htmlcov/
+
+# ==========================================
+# IDEs and Text Editors
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+Thumbs.db
