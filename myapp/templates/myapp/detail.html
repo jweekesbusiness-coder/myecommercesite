@@ -21,10 +21,10 @@
         <div class="col-span-1 border rounded-lg p-6 space-y-4 shadow-md">
             <p class="text-2xl font-semibold text-gray-900">$ {{product.price}}</p>
             <div>
-                <select name="" id="">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                <select  id="select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>   
             </div>
             <p class="text-sm text-green-700">FREE delivery by Tomorrow</p>
@@ -33,11 +33,34 @@
             {%else%}
                 <p class="text-sm text-green-700">Out of stock</p>
             {%endif%}
-            <button class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-lg">Add to Cart</button>
+            <button class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-lg"
+            id="atc"
+            value="{{product.id}}"
+            >Add to Cart</button>
             <button class="w-full bg-gray-900 text-white font-semibold py-2 rounded-lg">Buy Now</button>
             <p class="text-sm text-green-600">
                 Sold by : Abtol Ravie Parts
             </p>
         </div>
     </div>
+    <script>
+        //Add to cart button click event
+        $(document).on("click","#atc",function(e){//Add to cart button click event
+            console.log("Add to cart button click");
+            //Ajax call to add product to cart
+            $.ajax({
+                type:"POST",
+                url:'{% url "cart_add" %}',
+                data: {
+                    csrfmiddlewaretoken:"{{csrf_token}}", //Add the csrf token to the request
+                    product_id: $("#atc").val(), //Get the product id from the button value
+                    product_quantity: $("#select option:selected").text() //Get the product quantity from the select box
+                },
+                success: function(json){
+                    console.log(json);
+                    document.getElementById("cart-qty").textContent = json.qty;
+                },
+            });
+        })
+    </script>
 {%endblock%}
